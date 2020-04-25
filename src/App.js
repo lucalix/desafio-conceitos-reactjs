@@ -11,8 +11,6 @@ function App() {
     api.get('/repositories').then(response => {
       setRepositories(response.data);
     });
-
-    console.log(repositories);
   }, []);
 
   async function handleAddRepository() {
