@@ -16,11 +16,19 @@ function App() {
   }, []);
 
   async function handleAddRepository() {
-    // TODO
+    const repoName = Date.now();
+
+    const response = await api.post('/repositories', {
+      title: `Repository ${repoName}`,
+      url: `https://github/com/lucalix/${repoName}`,
+      techs: ['Node', 'ReactJS', 'ReactNative']
+    });
+
+    setRepositories([...repositories, response.data]);
   }
 
   async function handleRemoveRepository(id) {
-    // TODO
+    // const response = await api.delete(`repositories/${id}`);
   }
 
   return (
@@ -30,7 +38,7 @@ function App() {
           <li key={repo.id}>
             {repo.title}
 
-            <button onClick={() => handleRemoveRepository(1)}>
+            <button onClick={() => handleRemoveRepository(repo.id)}>
               Remover
             </button>
           </li>
